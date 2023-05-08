@@ -245,18 +245,18 @@
             
             //estimate first
             var mygas;
-            let vote_hashed1 = keccak256('true').toString('hex')
-            let vote_hashed2 = keccak256('false').toString('hex')
-            console.log(vote_hashed1, vote_hashed2)
-            let vote_hashed = keccak256('true').toString('hex')
-            	Ballot.methods.doVote(vote_hashed).estimateGas({from: accountaddress})
+            let msg = "ttrue";
+            let secret = "SECRET";
+            let msg_secret = msg + secret;
+            let hashed_msg_secret = keccak256(msg_secret).toString('hex');
+            let msg_hash = msg + hashed_msg_secret;
+
+            Ballot.methods.doVote(msg_hash).estimateGas({from: accountaddress})
             .then(function(gasAmount){
                 mygas = gasAmount;
             })
-            console.log(Ballot.methods);
-            console.log("HAHA " + accountaddress);
-        	Ballot.methods.doVote(vote_hashed).send({
-                hashed: vote_hashed,
+            
+        	Ballot.methods.doVote(msg_hash).send({
                 from: accountaddress,
                 gas: mygas, 
                 gasPrice: web3.eth.gasPrice      	    
@@ -278,14 +278,18 @@
 
             //estimate first
             var mygas;
-            let vote_hashed = keccak256('false').toString('hex')
-            	Ballot.methods.doVote(vote_hashed).estimateGas({from: accountaddress})
+            let msg = "flase";
+            let secret = "SECRET";
+            let msg_secret = msg + secret;
+            let hashed_msg_secret = keccak256(msg_secret).toString('hex');
+            let msg_hash = msg + hashed_msg_secret;
+            console.log(msg_secret, hashed_msg_secret, msg_hash);
+            Ballot.methods.doVote(msg_hash).estimateGas({from: accountaddress})
             .then(function(gasAmount){
                 mygas = gasAmount;
             })
             
-        	Ballot.methods.doVote(vote_hashed).send({
-                hashed: vote_hashed,
+        	Ballot.methods.doVote(msg_hash).send({
                 from: accountaddress,
                 gas: mygas, 
                 gasPrice: web3.eth.gasPrice       	    
