@@ -109,7 +109,7 @@ contract Ballot {
             vote memory v;
             v.voterAddress = msg.sender;
             v.choice = _choice;
-            if (keccak256(abi.encodePacked("6273151f959616268004b58dbb21e5c851b7b8d04498b4aabee12291d22fc034 ")) == keccak256(abi.encodePacked(_choice))){
+            if (keccak256(abi.encodePacked("6273151f959616268004b58dbb21e5c851b7b8d04498b4aabee12291d22fc034")) == keccak256(abi.encodePacked(_choice))){
                 messageHash = keccak256(bytes(_choice));
                 countResult++; //counting on the go
             }
